@@ -1,0 +1,59 @@
+.NavProfile{
+    /*border: 2px solid green ;*/
+    
+    margin: 10% 10px;
+
+
+}
+
+.ProfileData{
+    /*border: 2px solid pink ;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.profileImage{
+    margin-top: 15px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+
+}
+.profilename{
+    /*border: 2px solid red ;*/
+
+}
+.profileemail{
+    /*border: 2px solid red ;*/
+    width: 90%;
+}
+.ProfileLink{
+    /*border: 2px solid red ;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+
+.Linkitem{
+    color: black;
+    font-weight: lighter;
+
+
+}
+.Linkitem:hover{
+    border-radius: 8px;
+    border: 1px solid ;
+    padding: 0px 1.9rem;
+    font-size: 0.9em;
+    font-weight: 300;
+    font-family: inherit;
+    background-color: #bfb7b7a1;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    border-color: #646cffda;
+    color: #f0ebeb;
+  }
