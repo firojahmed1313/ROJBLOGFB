@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import context from "../context/Context";
+import SetCookie from "../cookies/SetCookie";
 
 const Login = () => {
   const auth = useContext(context);
@@ -30,6 +31,9 @@ const Login = () => {
         }
       );
       console.log(api);
+      if(api.data.success){
+        SetCookie("token",JSON.stringify(api.data.user));
+      }
       auth.setIsAuth(true);
       toast.success(api.data.massage, {
         position: "top-center",
