@@ -1,4 +1,5 @@
 import {Blog} from "../Models/blog.js"
+import mongoose from 'mongoose';
 
 export const createNewBlog =async (req,res)=>{
 
@@ -54,15 +55,19 @@ export const deleteBlog =async(req,res)=>{
    
     const id = req.params.id;
 
-    const blogData = await Blog.findById(id)
+    const blogData = await Blog.findById(id);
     if(!blogData) return res.status(404).json({
         success: false,
-        massage:"Blog not found "
+        massage:"Blog not found"
     })
+    const filter = { _id: new mongoose.Types.ObjectId(id) }; 
+
+    const result = await Blog.deleteOne(filter);
 
     res.json({
         success: true,
-        massage:"Blog Deleted "
+        massage:"Blog Deleted",
+        result
     })
 }
 
