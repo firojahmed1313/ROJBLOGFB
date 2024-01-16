@@ -10,13 +10,13 @@ export const userRegister = async (req, res) => {
       success: false,
       massage: "User already exist .....",
     });
-  const hashPassword = await bcrypt.hash(password, 12);
+  /*const hashPassword = await bcrypt.hash(password, 12);*/
   const user = await User.create({
     name,
     email,
-    password: hashPassword,
+    password,
   });
-  createCookie(user, res, "User register successfull");
+  createCookie(req.body, res, "User register successfull");
 };
 
 export const userLogin = async (req, res) => {
@@ -27,8 +27,8 @@ export const userLogin = async (req, res) => {
       success: false,
       massage: "User do not exist .....",
     });
-  const ismatch = await bcrypt.compare(password, userexist.password);
-  if (!ismatch)
+  //const ismatch = await bcrypt.compare(password, userexist.password);
+  if (password != userexist.password)
     return res.status(400).json({
       success: false,
       massage: "password or email do not match .....",
