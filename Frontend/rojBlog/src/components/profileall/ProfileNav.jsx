@@ -15,15 +15,13 @@ const ProfileNav = () => {
     const localUrl = "https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/user/logOut"
 
     const api = await axios.get(localUrl, {
-      headers: {
-        "Content-Type": "application/json",
-      },
+      
       withCredentials: true,
     });
     console.log(api);
     auth.setIsAuth(false);
-    toast.success(api.data.massage, {
-      position: "top-center",
+    toast.success(api.data.message, {
+      position: "top-left",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -39,7 +37,7 @@ const ProfileNav = () => {
   return (
     <>
       <ToastContainer
-        position="top-center"
+        position="top-left"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
