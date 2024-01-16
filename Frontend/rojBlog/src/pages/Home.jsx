@@ -4,12 +4,12 @@ import axios from "axios";
 import Loder from "../components/Loder/Loder";
 const Home = () => {
   const [allblog, setAllBlog] = useState([]);
-  const url = "https://rojblog.onrender.com/api/blog/allBlog";
-  
+  //const url = "https://rojblog.onrender.com/api/blog/allBlog";
+  const localUrl = "https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/blog/allBlog"
   useEffect(() => {
     const fatchBlogData = async () => {
-      const BlogData = await axios.get(url, {
-        withCredentials: true,
+      const BlogData = await axios.get(localUrl, {
+        //withCredentials: true,
         headers: {
           "Content-Type": "application/json",
         },

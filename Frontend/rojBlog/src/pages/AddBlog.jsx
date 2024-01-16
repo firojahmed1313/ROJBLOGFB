@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import context from "../context/Context";
+import { useNavigate } from "react-router-dom";
 
 const initialData = {
   title: "",
@@ -12,6 +13,7 @@ const initialData = {
 const AddBlog = () => {
   const [blog, setBlog] = useState(initialData);
   const auth = useContext(context);
+  const navigate= useNavigate();
   console.log(auth)
   const inputEvent = (e) => {
     const { name, value } = e.target;
@@ -22,7 +24,8 @@ const AddBlog = () => {
 
     try {
       const url = "https://rojblog.onrender.com/api/blog/new";
-      const api = await axios.post(url, blog, {
+      const localUrl = "https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/blog/new"
+      const api = await axios.post(localUrl, blog, {
         headers: {
           "Content-Type": "application/json",
         },

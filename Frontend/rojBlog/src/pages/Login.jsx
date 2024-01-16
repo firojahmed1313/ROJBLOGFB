@@ -16,9 +16,10 @@ const Login = () => {
     e.preventDefault();
     console.log(email, password);
     try {
-      const url = "https://rojblog.onrender.com/api/user/logIn";
+      //const url = "https://rojblog.onrender.com/api/user/logIn";
+      const localUrl = "https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/user/logIn"
       const api = await axios.post(
-        url,
+        localUrl,
         {
           email,
           password,
@@ -31,9 +32,10 @@ const Login = () => {
         }
       );
       console.log(api);
+      /*
       if(api.data.success){
         SetCookie("token",JSON.stringify(api.data.user));
-      }
+      }*/2
       auth.setIsAuth(true);
       toast.success(api.data.massage, {
         position: "top-center",
