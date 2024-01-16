@@ -1,6 +1,8 @@
 import bcrypt from "bcrypt";
 import { User } from "../Models/user.js";
 import { createCookie } from "../utils/feature.js";
+import jwt from "jsonwebtoken";
+
 
 export const userRegister = async (req, res) => {
   const { name, email, password } = req.body;
@@ -41,18 +43,36 @@ export const userLogin = async (req, res) => {
 };
 
 export const userLogout = (req, res) => {
-  res
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).json({ success: false, message: 'No token found' });
+  }
+
+  try {
+    // Verify the token
+    const decode = jwt.verify(token, process.env.JWT_SCODE);
+    
+    // Clear the token cookie
+    res.clearCookie('token');
+
+    // Respond with a success message
+    res.json({ success: true, message: 'Logout successful'});
+  } catch (error) {
+    // Token verification failed
+    res.status(401).json({ success: false, message: 'Invalid token' });
+  }
+};
+  /*res
     .status(200)
-    .cookie("token", null, {
-      expires: new Date(Date.now()),
-      httpOnly: true,
-    })
+    .clearCookie('token')
     .json({
       success: true,
       massage: "successfully Logout",
+
     });
 };
-
+*/
 
 export const getMyProfile =(req,res)=>{
   res.status(200).json({

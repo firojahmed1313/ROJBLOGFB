@@ -11,8 +11,10 @@ const ProfileNav = () => {
   const navigate = useNavigate();
   console.log(auth);
   const logOut = async () => {
-    const url = "https://rojblog.onrender.com/api/user/logOut";
-    const api = await axios.get(url, {
+    //const url = "https://rojblog.onrender.com/api/user/logOut";
+    const localUrl = "https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/user/logOut"
+
+    const api = await axios.get(localUrl, {
       headers: {
         "Content-Type": "application/json",
       },
