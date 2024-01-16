@@ -10,6 +10,7 @@ const initialData = {
   description: "",
   imgUrl: "",
 };
+
 const AddBlog = () => {
   const [blog, setBlog] = useState(initialData);
   const auth = useContext(context);
@@ -23,7 +24,7 @@ const AddBlog = () => {
     e.preventDefault();
 
     try {
-      const url = "https://rojblog.onrender.com/api/blog/new";
+      //const url = "https://rojblog.onrender.com/api/blog/new";
       const localUrl = "https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/blog/new"
       const api = await axios.post(localUrl, blog, {
         headers: {
@@ -31,7 +32,7 @@ const AddBlog = () => {
         },
         withCredentials: true,
       });
-      console.log(api);
+      console.log("api data blog ",api);
       auth.setIsAuth(true);
       toast.success(api.data.massage, {
         position: "top-center",

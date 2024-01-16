@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 const data = {
   title: "fffffffff",
   createAt: "23-23-2345",
@@ -7,14 +7,15 @@ const data = {
   imgUrl:
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsjv8k9FpJH5AvquxbVyd06B5UludsXYeHuTLTGllucw&s",
 };
+/*
 const user = {
   name: "MD FIROJ AHMED",
   email: "firojahmed@gmail.com",
-};
-const Blogeditdelete = () => {
+};*/
+const Blogeditdelete = ({blogData,user}) => {
   return (
     <div className="homeBlog">
-      <h1 className="blogTitle">{data.title}</h1>
+      <h1 className="blogTitle">{blogData.title}</h1>
       <div className="blogAddOn">
         <img
           width="25"
@@ -39,9 +40,9 @@ const Blogeditdelete = () => {
         <h3 className="blogAddOntext">{data.createAt.substring(0, 10)}</h3>
       </div>
       <div className="blogDetails">
-        <img className="blogDetailsImage" src={data.imgUrl} alt="blog image" />
+        <img className="blogDetailsImage" src={blogData.imgUrl} alt="blog image" />
         <div >
-          <p className="blogDescription">{data.description}</p>
+          <p className="blogDescription">{blogData.description}</p>
           <div className="editDelete">
           <button onClick={() => editBlog} type="submit">
            Edit

@@ -12,6 +12,7 @@ export const createNewBlog =async (req,res)=>{
     });
     res.status(201).json({
         success: true,
+        massage:"Blog Added Successfully",
         blog
     })
 }
@@ -22,6 +23,7 @@ export const getMyBlog = async(req,res)=>{
     const blogData = await Blog.find({user:userid})
     res.status(200).json({
         success: true,
+        user: req.user,
         blogData
     })
 }
@@ -73,7 +75,8 @@ export const getAllBlog = async (req,res)=>{
 
     res.json({
         success: true,
-        massage:"All Blog ",
+        massage:"All Blog",
+        
         allblogData
     })
 }
