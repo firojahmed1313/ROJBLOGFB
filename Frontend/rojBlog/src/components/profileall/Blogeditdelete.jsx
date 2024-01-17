@@ -1,8 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import context from "../../context/Context";
 
 const data = {
   title: "fffffffff",
@@ -19,6 +20,9 @@ const user = {
 };*/
 const Blogeditdelete = ({ blogData, user }) => {
   const navigate = useNavigate();
+  const auth = useContext(context);
+
+  
 
   const deleteBlog = async () => {
     console.log("deleteBlog");
@@ -73,6 +77,11 @@ const Blogeditdelete = ({ blogData, user }) => {
 
   const editBlog= async()=>{
     console.log("edited");
+    //console.log(blogData);
+    auth.setBlogEdited(blogData);
+    console.log(auth.blogEdited);
+    auth.setIsEdit(true);
+    navigate("/addBlog");
   }
   return (
     <>

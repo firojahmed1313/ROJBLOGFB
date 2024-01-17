@@ -12,9 +12,11 @@ const initialData = {
 };
 
 const AddBlog = () => {
-  const [blog, setBlog] = useState(initialData);
   const auth = useContext(context);
-  const navigate= useNavigate();
+  const [blog, setBlog] = useState(auth.isEdit ? auth.blogEdited : initialData);
+
+  const navigate = useNavigate();
+  console.log(auth.blogEdited);
   console.log(auth)
   const inputEvent = (e) => {
     const { name, value } = e.target;
@@ -22,17 +24,30 @@ const AddBlog = () => {
   };
   const onSubmits = async (e) => {
     e.preventDefault();
-
+    var api;
     try {
       //const url = "https://rojblog.onrender.com/api/blog/new";
-      const localUrl = "https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/blog/new"
-      const api = await axios.post(localUrl, blog, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      });
-      console.log("api data blog ",api);
+      if (auth.isEdit) {
+        const localUrle = `https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/blog/updateBlog/${auth.blogEdited._id}`
+         api = await axios.put(localUrle, blog, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        });
+        auth.setIsEdit(false);
+      } else {
+        const localUrla = "https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/blog/new"
+         api = await axios.post(localUrla, blog, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        });
+
+      }
+
+      console.log("api data blog ", api);
       auth.setIsAuth(true);
       toast.success(api.data.massage, {
         position: "top-center",
@@ -61,7 +76,7 @@ const AddBlog = () => {
       });
     }
     console.log(blog);
-    
+
   };
   return (
     <>
@@ -105,7 +120,7 @@ const AddBlog = () => {
             onChange={inputEvent}
           />
           <button onClick={() => onSubmits} type="submit">
-            Create Blog
+            {(auth.isEdit)? "Update Blog" : "Create Blog"}
           </button>
         </form>
       </div>
