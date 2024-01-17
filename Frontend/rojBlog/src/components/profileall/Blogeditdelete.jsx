@@ -70,6 +70,10 @@ const Blogeditdelete = ({ blogData, user }) => {
       });
     }
   }
+
+  const editBlog= async()=>{
+    console.log("edited");
+  }
   return (
     <>
     <ToastContainer
@@ -114,7 +118,7 @@ const Blogeditdelete = ({ blogData, user }) => {
           <div >
             <p className="blogDescription">{blogData.description}</p>
             <div className="editDelete">
-              <button onClick={() => editBlog} type="submit">
+              <button onClick={editBlog} type="submit">
                 Edit
               </button>
               <button onClick={deleteBlog} type="submit">
