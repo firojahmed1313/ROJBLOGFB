@@ -6,6 +6,7 @@ import AddBlog from "./pages/AddBlog";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Navber from "./components/Navber";
+import SaveBlog from "./pages/SaveBlog";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/" element={<Home/>} />
         <Route path="/register" element={<Register />} />
         <Route path="/addBlog" element={<AddBlog />} />
+        <Route path="/saveBlog" element={<SaveBlog />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
       </Routes>

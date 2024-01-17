@@ -66,8 +66,8 @@ const ProfileNav = () => {
           <Link to={"/addBlog"} className="Linkitem">
             <h3>AddBlog</h3>
           </Link>
-          <Link to={"/addBlog"} className="Linkitem">
-            <h3>AddBlog</h3>
+          <Link to={"/saveBlog"} className="Linkitem">
+            <h3>SaveBlog</h3>
           </Link>
           <div className="Linkitem" onClick={logOut}>
             <h3>Logout</h3>
