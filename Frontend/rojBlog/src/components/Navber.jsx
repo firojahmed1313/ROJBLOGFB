@@ -1,14 +1,32 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Context from "../context/Context"
+import axios from "axios";
 
 const Navber = () => {
   const [searchData, setSearchData] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const auth = useContext(Context);
   console.log(auth.isAuth);
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(searchData);
+    try {
+      const response = await axios.post('https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/blog/search', {
+        searchData},{
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      setSearchResults(response.data);
+      console.log(searchResults);
+      setSearchData("")
+    } catch (error) {
+      console.error('Error searching:', error.response ? error.response.data : error.message);
+    }
+
   };
   return (
     <>

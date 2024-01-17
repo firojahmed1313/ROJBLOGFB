@@ -86,6 +86,34 @@ export const getAllBlog = async (req,res)=>{
     })
 }
 
+export const searchBlog = async (req, res) => {
+    const searchTerm = req.body.searchData;
+
+  try {
+    const results = await Blog.find({
+      $or: [
+        { title: { $regex: searchTerm, $options: 'i' } },
+        { description: { $regex: searchTerm, $options: 'i' } },
+      ],
+    });
+    //console.log(results);
+    /*if(results[0]==null) return res.status(404).json({
+        success: false,
+        massage:"There is no Blog"
+    })*/
+
+    res.json({
+        success: true,
+        massage:"search Blog",
+        results,
+        searchTerm
+    })
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
 export const getBlogById =async (req,res) =>{
     const id = req.params.id;
 
