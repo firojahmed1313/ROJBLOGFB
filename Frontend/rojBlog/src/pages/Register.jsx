@@ -22,12 +22,12 @@ const Register = () => {
     const { name, value } = e.target;
     setRegister({ ...register, [name]: value });
   };
-
+  const burl=import.meta.env.VITE_URL;
   const onSubmits = async (e) => {
     e.preventDefault();
     try {
       //const url = "https://rojblog.onrender.com/api/user/register";
-      const localUrl = "https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/user/register";
+      const localUrl = `${burl}/api/user/register`;
       const api = await axios.post(localUrl, register, {
         headers: {
           "Content-Type": "application/json",

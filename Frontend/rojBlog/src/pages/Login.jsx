@@ -12,12 +12,13 @@ const Login = () => {
   const [password, setpassword] = useState("");
   const navigate = useNavigate();
   console.log(auth);
+  const burl=import.meta.env.VITE_URL;
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(email, password);
     try {
       //const url = "https://rojblog.onrender.com/api/user/logIn";
-      const localUrl = "https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/user/logIn"
+      const localUrl = `${burl}/api/user/logIn`
       const api = await axios.post(
         localUrl,
         {

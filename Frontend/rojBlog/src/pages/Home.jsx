@@ -5,8 +5,11 @@ import Loder from "../components/Loder/Loder";
 const Home = () => {
   const [allblog, setAllBlog] = useState([]);
   //const url = "https://rojblog.onrender.com/api/blog/allBlog";  
-  const localUrl = "https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/blog/allBlog"
-
+  //const localUrl = "https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/blog/allBlog";
+  //const localUrl = "https://rojblogfb.vercel.app/api/blog/allBlog"
+  const burl=import.meta.env.VITE_URL;
+  const localUrl = `${burl}/api/blog/allBlog`;
+  console.log(burl);
   useEffect(() => {
     const fatchBlogData = async () => {
       const BlogData = await axios.get(localUrl, {

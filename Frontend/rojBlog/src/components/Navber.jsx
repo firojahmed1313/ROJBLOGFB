@@ -7,12 +7,13 @@ const Navber = () => {
   const [searchData, setSearchData] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const auth = useContext(Context);
+  const burl=import.meta.env.VITE_URL;
   console.log(auth.isAuth);
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(searchData);
     try {
-      const response = await axios.post('https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/blog/search', {
+      const response = await axios.post(`${burl}/api/blog/search`, {
         searchData},{
           headers: {
             "Content-Type": "application/json",

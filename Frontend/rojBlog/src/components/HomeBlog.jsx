@@ -3,8 +3,9 @@ import axios from "axios";
 import HomeBlogWithUser from "./HomeBlogWithUser";
 const HomeBlog = ({ data }) => {
   const [user, setuser] = useState([]);
+  const burl=import.meta.env.VITE_URL;
   //const url = `https://rojblog.onrender.com/user/${data.user}`;
-  const localUrl = `https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/user/${data.user}`;
+  const localUrl = `${burl}/user/${data.user}`;
   useEffect(() => {
     const getUserdata = async () => {
       const userdata = await axios.get(localUrl, {

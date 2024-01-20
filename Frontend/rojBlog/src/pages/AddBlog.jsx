@@ -22,13 +22,14 @@ const AddBlog = () => {
     const { name, value } = e.target;
     setBlog({ ...blog, [name]: value });
   };
+  const burl=import.meta.env.VITE_URL;
   const onSubmits = async (e) => {
     e.preventDefault();
     var api;
     try {
       //const url = "https://rojblog.onrender.com/api/blog/new";
       if (auth.isEdit) {
-        const localUrle = `https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/blog/updateBlog/${auth.blogEdited._id}`
+        const localUrle = `${burl}/api/blog/updateBlog/${auth.blogEdited._id}`
          api = await axios.put(localUrle, blog, {
           headers: {
             "Content-Type": "application/json",
@@ -37,7 +38,8 @@ const AddBlog = () => {
         });
         auth.setIsEdit(false);
       } else {
-        const localUrla = "https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/blog/new"
+        const localUrla = `${burl}/api/blog/new`
+
          api = await axios.post(localUrla, blog, {
           headers: {
             "Content-Type": "application/json",
