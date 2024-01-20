@@ -33,10 +33,10 @@ const Login = () => {
         }
       );
       console.log(api);
-      /*
+      
       if(api.data.success){
         SetCookie("token",JSON.stringify(api.data.user));
-      }*/2
+      }
       auth.setIsAuth(true);
       toast.success(api.data.massage, {
         position: "top-center",
