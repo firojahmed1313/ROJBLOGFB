@@ -9,7 +9,7 @@ const Home = () => {
   //const localUrl = "https://rojblogfb.vercel.app/api/blog/allBlog"
   const burl=import.meta.env.VITE_URL;
   const localUrl = `${burl}/api/blog/allBlog`;
-  console.log(burl);
+  console.log(localUrl);
   useEffect(() => {
     const fatchBlogData = async () => {
       const BlogData = await axios.get(localUrl, {

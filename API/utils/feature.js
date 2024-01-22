@@ -7,7 +7,7 @@ export const createCookie = (user , res , massage) => {
   console.log(token)
   res
     .status(201)
-    .cookie("token", token, {
+    /*.cookie("token", token, {
       path: "/",
       httpOnly: true,
       expires: new Date(Date.now() + 1000 * 60 * 50),
@@ -15,7 +15,7 @@ export const createCookie = (user , res , massage) => {
       //secure: process.env.NODE_MODE === "devlopment" ? false :true ,
       sameSite: "strict",
       secure: true ,
-    })
+    })*/
     .json({
       success:true,
       massage, 
