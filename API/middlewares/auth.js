@@ -12,7 +12,7 @@ export const isSignin =async(req,res,next)=>{
     if(!tokenf) return res.status(404).json({
         success: false,
         massage: "plz Login",
-        tokenf,
+        tokendata : tokenf ,
         
     })
 
