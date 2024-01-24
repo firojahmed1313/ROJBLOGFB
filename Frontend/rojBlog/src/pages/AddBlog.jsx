@@ -34,6 +34,7 @@ const AddBlog = () => {
          api = await axios.put(localUrle, blog, {
           headers: {
             "Content-Type": "application/json",
+            "Authorization" : `${Cookies.get("tokenf")}`
           },
           withCredentials: true,
         });

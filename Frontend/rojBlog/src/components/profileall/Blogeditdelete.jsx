@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import context from "../../context/Context";
+import Cookies from 'js-cookie';
 
 const data = {
   title: "fffffffff",
@@ -31,6 +32,9 @@ const Blogeditdelete = ({ blogData, user }) => {
       const localUrl = `https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/blog/deleteBlog/${blogData._id}`;
       console.log(localUrl);
       const api = await axios.delete(localUrl, {
+        headers: {
+          "Authorization" : `${Cookies.get("tokenf")}`
+        },
         withCredentials: true,
       });
 
