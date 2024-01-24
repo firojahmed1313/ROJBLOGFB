@@ -36,6 +36,8 @@ const ProfileNav = () => {
       navigate("/");
     }, "3000");*/
     DeleteCookie('tokenf');
+    auth.setIsAuth(false);
+    
     setTimeout(() => {
       navigate("/");
     }, "3000");
