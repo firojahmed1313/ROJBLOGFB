@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
@@ -7,8 +7,15 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Navber from "./components/Navber";
 import SaveBlog from "./pages/SaveBlog";
+import GetCookie from "./cookies/GetCookie";
+import context from "./context/Context";
 
 const App = () => {
+  const auth = useContext(context);
+  const isCookies= GetCookie("tokenf");
+  if(isCookies){
+    auth.setIsAuth(true);
+  }
   return (
     <>
       <Navber/>
