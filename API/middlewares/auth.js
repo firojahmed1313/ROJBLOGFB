@@ -10,9 +10,7 @@ export const isSignin =async(req,res,next)=>{
     console.log(userId);
     if(!userId) return res.status(404).json({
         success: false,
-        massage: "plz Login",
-        
-        
+        massage: "plz Login",  
     })
 
     const decode = jwt.verify(userId, process.env.JWT_SCODE);

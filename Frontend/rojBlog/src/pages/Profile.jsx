@@ -4,7 +4,7 @@ import ProfileBlog from "../components/profileall/ProfileBlog";
 import GetCookie from "../cookies/GetCookie";
 
 const Profile = () => {
-  console.log("data :" , GetCookie("tokenf"))
+  //console.log("data :" , GetCookie("tokenf"))
   return (
     <>
       <div className="profile">

@@ -5,14 +5,16 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Context from "../../context/Context";
+import DeleteCookie from "../../cookies/DeleteCookie";
 
 const ProfileNav = () => {
   const auth = useContext(Context);
+  
   const navigate = useNavigate();
   console.log(auth);
   const logOut = async () => {
     //const url = "https://rojblog.onrender.com/api/user/logOut";
-    const localUrl = "https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/user/logOut"
+    /*const localUrl = "https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/user/logOut"
 
     const api = await axios.get(localUrl, {
       
@@ -32,7 +34,21 @@ const ProfileNav = () => {
     });
     setTimeout(() => {
       navigate("/");
+    }, "3000");*/
+    DeleteCookie('tokenf');
+    setTimeout(() => {
+      navigate("/");
     }, "3000");
+    toast.success("Logout Sucessfully", {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
   return (
     <>
