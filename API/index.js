@@ -20,7 +20,13 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({ extended: true })); // post from data
 app.use(express.static(path.join(path.resolve(), "pubic"))); // add static file
 app.use(cookieParser())
+config({
+  path:"./data/config.env"
+})
+//const urlfrontend = process.env.FRONTED_URL;
+//console.log(urlfrontend);
 app.use(cors({
+  
   origin: process.env.FRONTED_URL,
   //origin: "https://5173-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io",
   methods:["GET" ,"POST" , "PUT" , "DELETE"],
@@ -28,9 +34,7 @@ app.use(cors({
   optionSuccessStatus:200
 }))
 
-config({
-  path:"./data/config.env"
-})
+
 
 
 const PORT = process.env.PORT;

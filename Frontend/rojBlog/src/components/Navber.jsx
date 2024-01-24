@@ -50,17 +50,17 @@ const Navber = () => {
             </form>
           </div>
 
-          <Link to={"/register"} className="navitem">
+          {(!auth.isAuth)?<Link to={"/register"} className="navitem">
             <h3>Register</h3>
-          </Link>
+          </Link>:<h3></h3>}
 
           {(auth.isAuth)?<Link to={"/profile"} className="navitem">
             <h3>Profile</h3>
           </Link> : <h3></h3>}
 
-          <Link to={"/login"} className="navitem">
+          {(!auth.isAuth)?<Link to={"/login"} className="navitem">
             <h3>Login</h3>
-          </Link>
+          </Link>: <h3></h3>}
         </div>
       </div>
     </>
