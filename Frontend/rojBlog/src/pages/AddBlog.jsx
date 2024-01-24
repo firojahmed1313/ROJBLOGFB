@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import context from "../context/Context";
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 const initialData = {
   title: "",
@@ -43,8 +44,9 @@ const AddBlog = () => {
          api = await axios.post(localUrla, blog, {
           headers: {
             "Content-Type": "application/json",
+            "Authorization" : `${Cookies.get("tokenf")}`
           },
-          withCredentials: true,
+          
         });
 
       }

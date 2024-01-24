@@ -35,7 +35,7 @@ const Login = () => {
       console.log(api);
       
       if(api.data.success){
-        SetCookie("tokenf",JSON.stringify(api.data.user));
+        SetCookie("tokenf",JSON.stringify(api.data.token));
       }
       auth.setIsAuth(true);
       toast.success(api.data.massage, {
