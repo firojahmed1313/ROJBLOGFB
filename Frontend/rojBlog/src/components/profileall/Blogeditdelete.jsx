@@ -23,13 +23,13 @@ const Blogeditdelete = ({ blogData, user }) => {
   const navigate = useNavigate();
   const auth = useContext(context);
 
-  
+  const burl=import.meta.env.VITE_URL;
 
   const deleteBlog = async () => {
     console.log("deleteBlog");
     try {
       //const url = "https://rojblog.onrender.com/api/user/logIn";
-      const localUrl = `https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/blog/deleteBlog/${blogData._id}`;
+      const localUrl = `${burl}/api/blog/deleteBlog/${blogData._id}`;
       console.log(localUrl);
       const api = await axios.delete(localUrl, {
         headers: {
