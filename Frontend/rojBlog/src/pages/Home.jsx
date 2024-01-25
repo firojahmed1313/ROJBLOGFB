@@ -30,10 +30,13 @@ const Home = () => {
 
     fatchBlogData();
   }, []);
-  let length =auth.searchBlog.length;
-  let lastd= ((length)%3==0 ? (length)/3 :Math.floor((length)/3) +1);
-  //setLast(lastd)
-  console.log(lastd);
+  let length = auth.searchBlog.length;
+  useEffect(() => {
+    let lastd = ((length) % 3 === 0 ? length / 3 : Math.floor(length / 3) + 1);
+    setLast(lastd);
+  }, [auth.searchBlog.length]); // Add dependency to the useEffect
+  
+  //console.log(lastd);
   console.log(auth.searchBlog);
   //pagination 
   const prev=()=>{
