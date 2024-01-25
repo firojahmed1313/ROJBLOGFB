@@ -1,34 +1,47 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Context from "../context/Context"
 import axios from "axios";
 
 const Navber = () => {
   const [searchData, setSearchData] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
   const auth = useContext(Context);
-  const burl=import.meta.env.VITE_URL;
+  const burl = import.meta.env.VITE_URL;
   console.log(auth.isAuth);
-  const onSubmit = async (e) => {
+
+  const onsubmitform=(e)=>{
     e.preventDefault();
-    console.log(searchData);
-    try {
-      const response = await axios.post(`${burl}/api/blog/search`, {
-        searchData},{
+  }
+  console.log(searchData);
+
+  useEffect(() => {
+    const searchFunction = async () => {
+      try {
+        const response = await axios.post(`${burl}/api/blog/search`, {
+          searchData
+        }, {
           headers: {
             "Content-Type": "application/json",
           },
           withCredentials: true,
         }
-      );
-      setSearchResults(response.data);
-      console.log(searchResults);
-      setSearchData("")
-    } catch (error) {
-      console.error('Error searching:', error.response ? error.response.data : error.message);
+        );
+        auth.setSearchBlog(response.data.results);
+        console.log(auth.searchBlog);
+        
+      } catch (error) {
+        console.error('Error searching:', error.response ? error.response.data : error.message);
+      }
     }
+    const debounceTimer = setTimeout(() => {
+      searchFunction();
+    }, 500); 
 
-  };
+    return () => clearTimeout(debounceTimer);
+    
+  }, [searchData])
+
+
   return (
     <>
       <div className="Navber">
@@ -39,7 +52,7 @@ const Navber = () => {
         </div>
         <div className="right">
           <div className="navfrom">
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onsubmitform}>
               <input
                 name="searchData"
                 value={searchData}
@@ -50,17 +63,17 @@ const Navber = () => {
             </form>
           </div>
 
-          {(!auth.isAuth)?<Link to={"/register"} className="navitem">
+          {(!auth.isAuth) ? <Link to={"/register"} className="navitem">
             <h3>Register</h3>
-          </Link>:<h3></h3>}
+          </Link> : <h3></h3>}
 
-          {(auth.isAuth)?<Link to={"/profile"} className="navitem">
+          {(auth.isAuth) ? <Link to={"/profile"} className="navitem">
             <h3>Profile</h3>
           </Link> : <h3></h3>}
 
-          {(!auth.isAuth)?<Link to={"/login"} className="navitem">
+          {(!auth.isAuth) ? <Link to={"/login"} className="navitem">
             <h3>Login</h3>
-          </Link>: <h3></h3>}
+          </Link> : <h3></h3>}
         </div>
       </div>
     </>

@@ -6,8 +6,9 @@ const State = (props) => {
     const [isEdit,setIsEdit] = useState(false)
     const [user,setUser] = useState("")
     const [blogEdited,setBlogEdited] = useState("")
+    const [searchBlog,setSearchBlog] = useState([])
   return (
-    <Context.Provider value={{isAuth,setIsAuth ,user,setUser,blogEdited,setBlogEdited,isEdit,setIsEdit}}>
+    <Context.Provider value={{isAuth,setIsAuth ,user,setUser,blogEdited,setBlogEdited,isEdit,setIsEdit,searchBlog,setSearchBlog}}>
         {props.children}
     </Context.Provider>
   )

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import HomeBlog from "../components/HomeBlog";
 import axios from "axios";
 import Loder from "../components/Loder/Loder";
+import context from "../context/Context";
 const Home = () => {
-  const [allblog, setAllBlog] = useState([]);
+  const auth = useContext(context);
   //const url = "https://rojblog.onrender.com/api/blog/allBlog";  
   //const localUrl = "https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/blog/allBlog";
   //const localUrl = "https://rojblogfb.vercel.app/api/blog/allBlog"
@@ -20,19 +21,20 @@ const Home = () => {
       });
 
       //console.log(BlogData.data.allblogData);
-      setAllBlog(BlogData.data.allblogData);
+      //setAllBlog(BlogData.data.allblogData);
+      auth.setSearchBlog(BlogData.data.allblogData);
     };
 
     fatchBlogData();
   }, []);
 
-  console.log(allblog);
-  //console.log("home");
+  //console.log(allblog);
+  console.log(auth.searchBlog);
 
   return (
     <>
-      {(allblog.length!=0) ? (
-        allblog.map((blog, index) => {
+      {(auth.searchBlog.length!=0) ? (
+        (auth.searchBlog).map((blog, index) => {
           return <HomeBlog data={blog} key={index} />;
         })
       ) : (
