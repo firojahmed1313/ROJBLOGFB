@@ -20,11 +20,17 @@ export const createNewBlog =async (req,res)=>{
 
 
 export const getMyBlog = async(req,res)=>{
+    const id = req.params.id;
+    const a= (id-1)*2;
     const userid = req.user._id;
-    const blogData = await Blog.find({user:userid})
+    const Data = await Blog.find({user:userid})
+    const totalBlogCount = Data.length;
+    const blogData = await Blog.find({user:userid}).skip(a).limit(2);
+    //console.log(blogData.length);
     res.status(200).json({
         success: true,
         user: req.user,
+        totalBlogCount,
         blogData
     })
 }

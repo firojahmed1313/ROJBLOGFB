@@ -10,7 +10,7 @@ router.post("/api/blog/new",isSignin,createNewBlog);
 
 router.post("/api/blog/search",searchBlog);
 
-router.get("/api/blog/myBlog",isSignin,getMyBlog);
+router.get("/api/blog/myBlog/:id",isSignin,getMyBlog);
 
 router.put("/api/blog/updateBlog/:id",isSignin,changeBlog);
 
