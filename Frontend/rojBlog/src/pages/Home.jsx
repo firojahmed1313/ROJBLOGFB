@@ -6,13 +6,15 @@ import context from "../context/Context";
 const Home = () => {
   const [first,setFirst]=useState(1);
   const [last,setLast]=useState(10);
+  const [count,setCount]=useState(10);
+   
 
   const auth = useContext(context);
   //const url = "https://rojblog.onrender.com/api/blog/allBlog";  
   //const localUrl = "https://5000-firojahmed131-rojblogfb-w8s8zoxujfd.ws-us107.gitpod.io/api/blog/allBlog";
   //const localUrl = "https://rojblogfb.vercel.app/api/blog/allBlog"
   const burl=import.meta.env.VITE_URL;
-  const localUrl = `${burl}/api/blog/allBlog`;
+  const localUrl = `${burl}/api/blog/allBlog/${first}`;
   console.log(localUrl);
   useEffect(() => {
     const fatchBlogData = async () => {
@@ -23,14 +25,14 @@ const Home = () => {
         },
       });
 
-      //console.log(BlogData.data.allblogData);
+      setCount(BlogData.data.totalBlogCount);
       //setAllBlog(BlogData.data.allblogData);
       auth.setSearchBlog(BlogData.data.allblogData);
     };
 
     fatchBlogData();
-  }, []);
-  let length = auth.searchBlog.length;
+  }, [first]);
+  let length = count;
   useEffect(() => {
     let lastd = ((length) % 3 === 0 ? length / 3 : Math.floor(length / 3) + 1);
     setLast(lastd);

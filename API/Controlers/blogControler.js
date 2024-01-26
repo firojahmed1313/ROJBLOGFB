@@ -72,7 +72,10 @@ export const deleteBlog =async(req,res)=>{
 }
 
 export const getAllBlog = async (req,res)=>{
-    const allblogData = await Blog.find()
+    const id = req.params.id;
+    const a= (id-1)*3;
+    const totalBlogCount = await Blog.countDocuments();
+    const allblogData = await Blog.find().skip(a).limit(3);
     if(!allblogData) return res.status(404).json({
         success: false,
         massage:"There is no Blog"
@@ -81,7 +84,7 @@ export const getAllBlog = async (req,res)=>{
     res.json({
         success: true,
         massage:"All Blog",
-        
+        totalBlogCount,
         allblogData
     })
 }

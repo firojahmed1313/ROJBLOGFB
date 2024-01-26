@@ -4,7 +4,7 @@ import Context from "../context/Context"
 import axios from "axios";
 
 const Navber = () => {
-  const [searchData, setSearchData] = useState("");
+  const [searchData, setSearchData] = useState();
   const auth = useContext(Context);
   const burl = import.meta.env.VITE_URL;
   console.log(auth.isAuth);

@@ -16,7 +16,7 @@ router.put("/api/blog/updateBlog/:id",isSignin,changeBlog);
 
 router.delete("/api/blog/deleteBlog/:id",isSignin,deleteBlog);
 
-router.get("/api/blog/allBlog", getAllBlog);
+router.get("/api/blog/allBlog/:id", getAllBlog);
 
 router.get("/api/blog/view/:id", isSignin, getBlogById);
 
