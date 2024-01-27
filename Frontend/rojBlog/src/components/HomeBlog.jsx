@@ -3,7 +3,7 @@ import axios from "axios";
 import HomeBlogWithUser from "./HomeBlogWithUser";
 const HomeBlog = ({ data }) => {
   const [user, setuser] = useState([]);
-  const burl=import.meta.env.VITE_URL;
+  const burl = import.meta.env.VITE_URL;
   //const url = `https://rojblog.onrender.com/user/${data.user}`;
   const localUrl = `${burl}/user/${data.user}`;
   useEffect(() => {
@@ -25,9 +25,10 @@ const HomeBlog = ({ data }) => {
       {//<HomeBlogWithUser data={data} user={user} />
       }
 
-        <div className="homeBlog">
-          <h1 className="blogTitle">{data.title}</h1>
-          <div className="blogAddOn">
+      <div className="homeBlog">
+        <h1 className="blogTitle">{data.title}</h1>
+        <div className="blogAddOn">
+          <div className="blogimageHeading">
             <img
               width="25"
               height="25"
@@ -35,6 +36,8 @@ const HomeBlog = ({ data }) => {
               alt="user"
             />
             <h3 className="blogAddOntext">{user.name}</h3>
+          </div>
+          <div className="blogimageHeading">
             <img
               width="25"
               height="25"
@@ -42,6 +45,8 @@ const HomeBlog = ({ data }) => {
               alt="new-post"
             />
             <h3 className="blogAddOntext">{user.email}</h3>
+          </div>
+          <div className="blogimageHeading">
             <img
               width="25"
               height="25"
@@ -50,17 +55,18 @@ const HomeBlog = ({ data }) => {
             />
             <h3 className="blogAddOntext">{data.createAt.substring(0, 10)}</h3>
           </div>
-          <div className="blogDetails">
-            <img
-              className="blogDetailsImage"
-              src={data.imgUrl}
-              alt="blog image"
-            />
-
-            <p className="blogDescription">{data.description}</p>
-          </div>
         </div>
-        
+        <div className="blogDetails">
+          <img
+            className="blogDetailsImage"
+            src={data.imgUrl}
+            alt="blog image"
+          />
+
+          <p className="blogDescription">{data.description}</p>
+        </div>
+      </div>
+
     </>
   );
 };

@@ -23,7 +23,7 @@ const Blogeditdelete = ({ blogData, user }) => {
   const navigate = useNavigate();
   const auth = useContext(context);
 
-  const burl=import.meta.env.VITE_URL;
+  const burl = import.meta.env.VITE_URL;
 
   const deleteBlog = async () => {
     console.log("deleteBlog");
@@ -33,7 +33,7 @@ const Blogeditdelete = ({ blogData, user }) => {
       console.log(localUrl);
       const api = await axios.delete(localUrl, {
         headers: {
-          "Authorization" : `${Cookies.get("tokenf")}`
+          "Authorization": `${Cookies.get("tokenf")}`
         },
         withCredentials: true,
       });
@@ -79,7 +79,7 @@ const Blogeditdelete = ({ blogData, user }) => {
     }
   }
 
-  const editBlog= async()=>{
+  const editBlog = async () => {
     console.log("edited");
     //console.log(blogData);
     auth.setBlogEdited(blogData);
@@ -89,7 +89,7 @@ const Blogeditdelete = ({ blogData, user }) => {
   }
   return (
     <>
-    <ToastContainer
+      <ToastContainer
         position="top-center"
         autoClose={5000}
         hideProgressBar={false}
@@ -104,27 +104,33 @@ const Blogeditdelete = ({ blogData, user }) => {
       <div className="homeBlog">
         <h1 className="blogTitle">{blogData.title}</h1>
         <div className="blogAddOn">
-          <img
-            width="25"
-            height="25"
-            src="https://img.icons8.com/ios-filled/50/user.png"
-            alt="user"
-          />
-          <h3 className="blogAddOntext">{user.name}</h3>
-          <img
-            width="25"
-            height="25"
-            src="https://img.icons8.com/metro/26/new-post.png"
-            alt="new-post"
-          />
-          <h3 className="blogAddOntext">{user.email}</h3>
-          <img
-            width="25"
-            height="25"
-            src="https://img.icons8.com/material-outlined/24/calendar--v1.png"
-            alt="calendar--v1"
-          />
-          <h3 className="blogAddOntext">{data.createAt.substring(0, 10)}</h3>
+          <div className="blogimageHeading">
+            <img
+              width="25"
+              height="25"
+              src="https://img.icons8.com/ios-filled/50/user.png"
+              alt="user"
+            />
+            <h3 className="blogAddOntext">{user.name}</h3>
+          </div>
+          <div className="blogimageHeading">
+            <img
+              width="25"
+              height="25"
+              src="https://img.icons8.com/metro/26/new-post.png"
+              alt="new-post"
+            />
+            <h3 className="blogAddOntext">{user.email}</h3>
+          </div>
+          <div className="blogimageHeading">
+            <img
+              width="25"
+              height="25"
+              src="https://img.icons8.com/material-outlined/24/calendar--v1.png"
+              alt="calendar--v1"
+            />
+            <h3 className="blogAddOntext">{data.createAt.substring(0, 10)}</h3>
+          </div>
         </div>
         <div className="blogDetails">
           <img className="blogDetailsImage" src={blogData.imgUrl} alt="blog image" />
