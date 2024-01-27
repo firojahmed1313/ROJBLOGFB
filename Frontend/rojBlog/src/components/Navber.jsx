@@ -5,40 +5,43 @@ import axios from "axios";
 
 const Navber = () => {
   const [searchData, setSearchData] = useState();
+  const [search, setSearch] = useState(false);
   const auth = useContext(Context);
   const burl = import.meta.env.VITE_URL;
   console.log(auth.isAuth);
 
-  const onsubmitform=(e)=>{
+  const onsubmitform = (e) => {
     e.preventDefault();
   }
   console.log(searchData);
 
   useEffect(() => {
     const searchFunction = async () => {
-      try {
-        const response = await axios.post(`${burl}/api/blog/search`, {
-          searchData
-        }, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
+      if (search) {
+        try {
+          const response = await axios.post(`${burl}/api/blog/search`, {
+            searchData
+          }, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+          );
+          auth.setSearchBlog(response.data.results);
+          console.log(auth.searchBlog);
+
+        } catch (error) {
+          console.error('Error searching:', error.response ? error.response.data : error.message);
         }
-        );
-        auth.setSearchBlog(response.data.results);
-        console.log(auth.searchBlog);
-        
-      } catch (error) {
-        console.error('Error searching:', error.response ? error.response.data : error.message);
       }
     }
     const debounceTimer = setTimeout(() => {
       searchFunction();
-    }, 500); 
+    }, 500);
 
     return () => clearTimeout(debounceTimer);
-    
+
   }, [searchData])
 
 
@@ -57,7 +60,10 @@ const Navber = () => {
                 name="searchData"
                 value={searchData}
                 placeholder="Search"
-                onChange={(e) => setSearchData(e.target.value)}
+                onChange={(e) => {
+                  setSearchData(e.target.value);
+                  setSearch(true);
+                }}
                 type="text"
               />
             </form>

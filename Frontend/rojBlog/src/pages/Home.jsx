@@ -63,7 +63,7 @@ const Home = () => {
   }
   return (
     <>
-      {(length!=0) ? (
+      {(auth.searchBlog.length!=0) ? (
         (auth.searchBlog).map((blog, index) => {
           return <HomeBlog data={blog} key={index} />;
         })

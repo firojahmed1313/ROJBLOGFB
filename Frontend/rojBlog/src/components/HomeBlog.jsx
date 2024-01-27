@@ -63,7 +63,7 @@ const HomeBlog = ({ data }) => {
             alt="blog image"
           />
 
-          <p className="blogDescription">{data.description}</p>
+          <p className="blogDescription">{data.description.substring(0, 500) }....</p>
         </div>
       </div>
 

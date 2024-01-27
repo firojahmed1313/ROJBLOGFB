@@ -135,7 +135,7 @@ const Blogeditdelete = ({ blogData, user }) => {
         <div className="blogDetails">
           <img className="blogDetailsImage" src={blogData.imgUrl} alt="blog image" />
           <div >
-            <p className="blogDescription">{blogData.description}</p>
+            <p className="blogDescription">{blogData.description.substring(0, 500)}...</p>
             <div className="editDelete">
               <button onClick={editBlog} type="submit">
                 Edit
