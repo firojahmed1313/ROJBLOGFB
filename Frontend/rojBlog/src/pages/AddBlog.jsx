@@ -5,7 +5,9 @@ import "react-toastify/dist/ReactToastify.css";
 import context from "../context/Context";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
-
+import TitleIcon from '@mui/icons-material/Title';
+import DescriptionIcon from '@mui/icons-material/Description';
+import LinkIcon from '@mui/icons-material/Link';
 const initialData = {
   title: "",
   description: "",
@@ -23,7 +25,7 @@ const AddBlog = () => {
     const { name, value } = e.target;
     setBlog({ ...blog, [name]: value });
   };
-  const burl=import.meta.env.VITE_URL;
+  const burl = import.meta.env.VITE_URL;
   const onSubmits = async (e) => {
     e.preventDefault();
     var api;
@@ -31,10 +33,10 @@ const AddBlog = () => {
       //const url = "https://rojblog.onrender.com/api/blog/new";
       if (auth.isEdit) {
         const localUrle = `${burl}/api/blog/updateBlog/${auth.blogEdited._id}`
-         api = await axios.put(localUrle, blog, {
+        api = await axios.put(localUrle, blog, {
           headers: {
             "Content-Type": "application/json",
-            "Authorization" : `${Cookies.get("tokenf")}`
+            "Authorization": `${Cookies.get("tokenf")}`
           },
           withCredentials: true,
         });
@@ -42,12 +44,12 @@ const AddBlog = () => {
       } else {
         const localUrla = `${burl}/api/blog/new`
 
-         api = await axios.post(localUrla, blog, {
+        api = await axios.post(localUrla, blog, {
           headers: {
             "Content-Type": "application/json",
-            "Authorization" : `${Cookies.get("tokenf")}`
+            "Authorization": `${Cookies.get("tokenf")}`
           },
-          
+
         });
 
       }
@@ -100,32 +102,41 @@ const AddBlog = () => {
       <div className="formbody">
         <form onSubmit={onSubmits}>
           <h1>CREATE BLOG</h1>
-          <input
-            placeholder="Enter Blog Title"
-            type="text"
-            name="title"
-            id="title"
-            value={blog.title}
-            onChange={inputEvent}
-          />
-          <input
-            placeholder="Enter Blog Description"
-            type="text"
-            name="description"
-            id="description"
-            value={blog.description}
-            onChange={inputEvent}
-          />
-          <input
-            placeholder="Enter Blog imgUrl"
-            type="text"
-            name="imgUrl"
-            id="imgUrl"
-            value={blog.imgUrl}
-            onChange={inputEvent}
-          />
+          <div className="formiconplusi">
+            <TitleIcon fontSize="large" />
+            <input
+              placeholder="Enter Blog Title"
+              type="text"
+              name="title"
+              id="title"
+              value={blog.title}
+              onChange={inputEvent}
+            />
+          </div>
+          <div className="formiconplusi">
+            <DescriptionIcon fontSize="large" />
+            <input
+              placeholder="Enter Blog Description"
+              type="text"
+              name="description"
+              id="description"
+              value={blog.description}
+              onChange={inputEvent}
+            />
+          </div>
+          <div className="formiconplusi">
+            <LinkIcon fontSize="large" />
+            <input
+              placeholder="Enter Blog imgUrl"
+              type="text"
+              name="imgUrl"
+              id="imgUrl"
+              value={blog.imgUrl}
+              onChange={inputEvent}
+            />
+          </div>
           <button onClick={() => onSubmits} type="submit">
-            {(auth.isEdit)? "Update Blog" : "Create Blog"}
+            {(auth.isEdit) ? "Update Blog" : "Create Blog"}
           </button>
         </form>
       </div>

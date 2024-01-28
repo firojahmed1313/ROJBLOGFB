@@ -5,7 +5,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import context from "../context/Context";
 import { useNavigate } from "react-router-dom";
-
+import PersonIcon from '@mui/icons-material/Person';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import GppGoodIcon from '@mui/icons-material/GppGood';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 const initialData = {
   name: "",
   email: "",
@@ -16,13 +20,14 @@ const Register = () => {
   const auth = useContext(context);
   console.log(auth.isAuth);
   const [register, setRegister] = useState(initialData);
+  const [isVisiable, setIsVisiable] = useState(false);
   const navigate = useNavigate();
 
   const inputEvent = (e) => {
     const { name, value } = e.target;
     setRegister({ ...register, [name]: value });
   };
-  const burl=import.meta.env.VITE_URL;
+  const burl = import.meta.env.VITE_URL;
   const onSubmits = async (e) => {
     e.preventDefault();
     try {
@@ -61,7 +66,7 @@ const Register = () => {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
     }
     //setRegister(initialData);
   };
@@ -87,30 +92,42 @@ const Register = () => {
         }
         <form onSubmit={onSubmits}>
           <h1>REGISTER</h1>
-          <input
-            placeholder="Enter Your Name"
-            type="text"
-            name="name"
-            id="name"
-            value={register.name}
-            onChange={inputEvent}
-          />
-          <input
-            placeholder="Enter Your Email"
-            type="email"
-            name="email"
-            id="email"
-            value={register.email}
-            onChange={inputEvent}
-          />
-          <input
-            placeholder="Enter Your Password"
-            type="password"
-            name="password"
-            id="password"
-            value={register.password}
-            onChange={inputEvent}
-          />
+          <div className="formiconplusi">
+            <PersonIcon fontSize="large" />
+            <input
+              placeholder="Enter Your Name"
+              type="text"
+              name="name"
+              id="name"
+              value={register.name}
+              onChange={inputEvent}
+            />
+          </div>
+          <div className="formiconplusi">
+            <AlternateEmailIcon fontSize="large" />
+            <input
+              placeholder="Enter Your Email"
+              type="email"
+              name="email"
+              id="email"
+              value={register.email}
+              onChange={inputEvent}
+            />
+          </div>
+          <div className="formiconplusi">
+            <GppGoodIcon fontSize="large" />
+            <input
+              placeholder="Enter Your Password"
+              type={(isVisiable) ? "text" : "password"}
+              name="password"
+              id="password"
+              value={register.password}
+              onChange={inputEvent}
+            />
+            <div onClick={() => setIsVisiable(!isVisiable)}>
+              {(isVisiable) ? <VisibilityOffIcon fontSize="large" /> : <VisibilityIcon fontSize="large" />}
+            </div>
+          </div>
           {
             //<input type="submit" value="Create Account" onClick={onSubmits} />
           }

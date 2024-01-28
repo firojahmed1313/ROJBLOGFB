@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Context from "../context/Context"
 import axios from "axios";
-
+import LoginIcon from '@mui/icons-material/Login';
+import DehazeIcon from '@mui/icons-material/Dehaze';
 const Navber = () => {
   const [searchData, setSearchData] = useState();
   const [search, setSearch] = useState(false);
@@ -78,7 +79,7 @@ const Navber = () => {
           </Link> : <h3></h3>}
 
           {(!auth.isAuth) ? <Link to={"/login"} className="navitem">
-            <h3>Login</h3>
+            <h3><LoginIcon/></h3>
           </Link> : <h3></h3>}
         </div>
       </div>

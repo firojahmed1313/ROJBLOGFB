@@ -5,7 +5,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import context from "../../context/Context";
 import Cookies from 'js-cookie';
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditNoteIcon from '@mui/icons-material/EditNote';
 const data = {
   title: "fffffffff",
   createAt: "23-23-2345",
@@ -22,7 +23,7 @@ const user = {
 const Blogeditdelete = ({ blogData, user }) => {
   const navigate = useNavigate();
   const auth = useContext(context);
-
+  auth.setUser(user);
   const burl = import.meta.env.VITE_URL;
 
   const deleteBlog = async () => {
@@ -87,6 +88,7 @@ const Blogeditdelete = ({ blogData, user }) => {
     auth.setIsEdit(true);
     navigate("/addBlog");
   }
+  console.log(user);
   return (
     <>
       <ToastContainer
@@ -138,10 +140,10 @@ const Blogeditdelete = ({ blogData, user }) => {
             <p className="blogDescription">{blogData.description.substring(0, 500)}...</p>
             <div className="editDelete">
               <button onClick={editBlog} type="submit">
-                Edit
+                <EditNoteIcon/>
               </button>
               <button onClick={deleteBlog} type="submit">
-                Delete
+                <DeleteIcon/>
               </button>
             </div>
           </div>
