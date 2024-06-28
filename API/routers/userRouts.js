@@ -1,5 +1,5 @@
 import express from "express";
-import { userLogin, userLogout, userRegister,getMyProfile, getuserByid } from "../Controlers/userControler.js";
+import { userLogin, userLogout, userRegister,getMyProfile, getuserByid, userEmailChack } from "../Controlers/userControler.js";
 import { isSignin } from "../middlewares/auth.js";
 
 const router = express.Router();
@@ -13,6 +13,7 @@ router.get("/register", (req, res) => {
 });
 
 router.post("/api/user/register", userRegister);
+router.post("/api/user/chackEmail", userEmailChack);
 
 router.get("/logIn", (req, res) => {
   res.render("logIn.ejs");

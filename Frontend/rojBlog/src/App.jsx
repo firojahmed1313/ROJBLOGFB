@@ -9,6 +9,7 @@ import Navber from "./components/Navber";
 import SaveBlog from "./pages/SaveBlog";
 import GetCookie from "./cookies/GetCookie";
 import context from "./context/Context";
+import ForgotPassword from "./pages/ForgotPassword";
 
 const App = () => {
   const auth = useContext(context);
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/saveBlog" element={<SaveBlog />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/forgotPassword" element={<ForgotPassword />} />
       </Routes>
     </>
   );

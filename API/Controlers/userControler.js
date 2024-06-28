@@ -41,6 +41,20 @@ export const userLogin = async (req, res) => {
     `Welcome ${userexist.name} and your email is ${userexist.email}`
   );
 };
+export const userEmailChack = async (req, res) => {
+  const { email } = req.body;
+  let userexist = await User.findOne({ email });
+  if (!userexist)
+    return res.status(400).json({
+      success: false,
+      massage: "User do not exist .....",
+    });
+  //const ismatch = await bcrypt.compare(password, userexist.password);
+  res.status(200).json({
+    success: true,
+    massage: "Email is available",
+  });
+};
 
 export const userLogout = (req, res) => {
   const token = req.cookies.token;

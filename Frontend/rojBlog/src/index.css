@@ -119,11 +119,11 @@ navitem:focus-visible {
 }
 
 form {
-
+  border: 2px solid red;
   display: flex;
   flex-direction: column;
   min-height: max-content;
-  height: 60dvh;
+  height: fit-content;
   border-radius: 5px;
   width: 90%;
   background-color: white;
@@ -131,6 +131,7 @@ form {
   justify-content: space-evenly;
   box-shadow: -10px 10px 10px rgba(0, 3, 7, 0.25);
   margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 .formiconplusi{
   border: 1px solid rgba(70, 70, 70, 0.5);
@@ -138,6 +139,8 @@ form {
   align-items: center;
   border-radius: 20px;
   padding: 2px 10px;
+  margin-bottom: 10px;
+  
 }
 
 form>h1 {
@@ -150,7 +153,10 @@ form>h1 {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   text-align: center;
 }
-
+form>h2 {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.644);
+  padding-bottom: 1vmax;
+}
 input {
   padding: 1vmax;
   width: 27vw;
@@ -159,6 +165,7 @@ input {
     sans-serif;
   font-size: 1.3vmax;
   border: none;
+  
 }
 
 form>input[type="submit"] {
@@ -171,6 +178,7 @@ form>input[type="submit"] {
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-size: 1.4vmax;
   transition: all 0.5s;
+  
 }
 
 form>input[type="submit"]:hover {

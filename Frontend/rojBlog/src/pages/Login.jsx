@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import context from "../context/Context";
 import SetCookie from "../cookies/SetCookie";
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
@@ -116,6 +116,7 @@ const Login = () => {
             </div>
           </div>
           <input type="submit" value="Login" />
+          <Link to={"/forgotPassword"} className="" ><h3>Forgot Password ?</h3></Link>
         </form>
       </div>
     </>
