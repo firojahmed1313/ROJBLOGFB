@@ -69,8 +69,8 @@ const ProfileNav = () => {
       <div className="NavProfile">
         <div className="ProfileData">
           <img src={Avatar} className="profileImage" />
-          <div className="profilename">{auth.user.name}</div>
-          <div className="profileemail">
+          <div className="profilename" title={auth.user.name}>{auth.user.name}</div>
+          <div className="profileemail" title={auth.user.email}>
             {auth.user.email}
           </div>
           <button onClick={() => editBlog} type="submit">

@@ -30,7 +30,7 @@
     font-size: 20px;
     font-weight: bold;
     margin-top: 15px;
-
+    overflow: hidden;
 }
 
 .profileemail {
@@ -40,6 +40,7 @@
     font-size: 20px;
     font-weight: bold;
     margin: 15px 0px;
+    overflow: hidden;
 }
 
 .ProfileLink {
