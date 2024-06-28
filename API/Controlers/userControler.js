@@ -41,6 +41,18 @@ export const userLogin = async (req, res) => {
     `Welcome ${userexist.name} and your email is ${userexist.email}`
   );
 };
+export const userResetPassword = async (req, res) => {
+  const { email, password } = req.body;
+  let userexist = await User.findOne({ email });
+  //const ismatch = await bcrypt.compare(password, userexist.password);
+  userexist.password = password;
+  await userexist.save();
+  res.status(200).json({
+    success: true,
+    massage: "Password changed successfully",
+  });
+  
+};
 export const userEmailChack = async (req, res) => {
   const { email } = req.body;
   let userexist = await User.findOne({ email });

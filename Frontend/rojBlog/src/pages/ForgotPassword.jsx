@@ -5,7 +5,11 @@ import GppGoodIcon from '@mui/icons-material/GppGood';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 const ForgotPassword = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [isEmail, setIsEmail] = useState(false);
     const [isVisiable, setIsVisiable] = useState(false);
@@ -39,25 +43,145 @@ const ForgotPassword = () => {
 
             } else {
                 setIsEmail(false);
+                toast.error(api.data.massage, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
             }
 
         } catch (error) {
             console.warn(error);
+            setIsEmail(false);
+            toast.error(error.response.data.massage, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+              });
         }
     }
     const onSubmitChange = async (e) => {
+        const codechack="1234";
         e.preventDefault();
         console.log(passwordSet, password);
+        if (passwordSet !== password) {
+            toast.error("Passwords do not match", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            return;
+        }
+        else if (codechack !==code){
+            toast.error("Code is not correct", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            return;
+        }
+        else if(codechack ===code && passwordSet === password ){
+            const localUrl = `${burl}/api/user/resetPassword`;
+            //console.log("change",localUrl);
+            try {
+                const api = await axios.post(
+                    localUrl,
+                    {
+                        email,
+                        password:  passwordSet,
+                    },
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        withCredentials: true,
+                    }
+                );
+                console.log(api);
+                if (api.data.success === true) {
+                    toast.success("Password Changed Successfully", {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                    });
+                    setTimeout(() => {
+                        navigate('/login');
+                    }, "3000");
+                } else {
+                    toast.error(api.data.massage, {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                    });
+                }
+            } catch (error) {
+                console.warn(error);
+                toast.error(error.response.data.massage, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+            }
+            
+        }
+
     }
     return (
         <>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
             <div className="formbody">
                 {
                     (isEmail) ?
                         <>
                             <form onSubmit={onSubmitChange}>
                                 <h1>Change Password</h1>
-                                <h2>Email: <span style={{"color":"blue"}}>{email}</span></h2>
+                                <h2>Email: <span style={{ "color": "blue" }}>{email}</span></h2>
                                 <div className="formiconplusi">
                                     <GppGoodIcon fontSize="large" />
                                     <input
@@ -78,8 +202,8 @@ const ForgotPassword = () => {
                                         placeholder="Enter Your Password again"
                                         type={(isVisiable) ? "text" : "password"}
                                         name="password"
-                                        id="password"
-                                        value={password}
+                                        id="passwordc"
+                                        value={passwordSet}
                                         onChange={(e) => setpasswordSet(e.target.value)}
                                     />
                                     <div onClick={() => setIsVisiable(!isVisiable)}>
