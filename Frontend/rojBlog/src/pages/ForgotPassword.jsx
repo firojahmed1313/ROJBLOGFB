@@ -40,6 +40,48 @@ const ForgotPassword = () => {
             console.log(api);
             if (api.data.success === true) {
                 setIsEmail(true);
+                try {
+                    console.log("SuccessfullyEmail")
+                    const emailsendUrl = `${burl}/api/user/emailCode`
+                    const sendEmail= await axios.post(
+                        emailsendUrl,
+                        {
+                            email,
+                            verifyCode:"1234",
+                        },
+                        {
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            withCredentials: true,
+                        }
+                    );
+                    console.log(sendEmail);
+                    if (sendEmail.data.success === true){
+                        toast.success("Verification code sent successfully", {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "dark",
+                        });
+                    }
+                } catch (error) {
+                    console.warn(error);
+                    toast.error(error.response.data.massage, {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                    });
+                }
 
             } else {
                 setIsEmail(false);

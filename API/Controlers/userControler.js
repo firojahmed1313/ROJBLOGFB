@@ -2,7 +2,8 @@ import bcrypt from "bcrypt";
 import { User } from "../Models/user.js";
 import { createCookie } from "../utils/feature.js";
 import jwt from "jsonwebtoken";
-import { resend } from "../config/ResendConnect.js";
+//import { resend } from "../config/ResendConnect.js";
+import { Resend } from 'resend';
 
 
 export const userRegister = async (req, res) => {
@@ -69,17 +70,25 @@ export const userEmailChack = async (req, res) => {
   });
 };
 export const userEmailCode = async (req, res) => {
+  const resend = new Resend(process.env.RESEND_API_KEY);
   const { email, verifyCode } = req.body;
+  console.log(email, verifyCode);
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Acme <onboarding@resend.dev>',
-      to: email,
+      from: 'onboarding@resend.dev',
+      to: ["mdfirojahmed3052000@gmail.com"],
       subject: 'Hello World',
       html: '<strong>It works!</strong>',
     });
-
-
-    console.log({ data });
+    //console.log(data);
+    //console.log(error);
+    if(error){
+      console.log(error);
+      return {
+        success: false,
+        massage: "Failed to send email code",
+      }
+    }
     return {
       success: true,
       massage: "Email code sent successfully",
