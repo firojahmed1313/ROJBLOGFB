@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import { User } from "../Models/user.js";
 import { createCookie } from "../utils/feature.js";
 import jwt from "jsonwebtoken";
+import { resend } from "../config/ResendConnect.js";
 
 
 export const userRegister = async (req, res) => {
@@ -51,7 +52,7 @@ export const userResetPassword = async (req, res) => {
     success: true,
     massage: "Password changed successfully",
   });
-  
+
 };
 export const userEmailChack = async (req, res) => {
   const { email } = req.body;
@@ -67,6 +68,30 @@ export const userEmailChack = async (req, res) => {
     massage: "Email is available",
   });
 };
+export const userEmailCode = async (req, res) => {
+  const { email, verifyCode } = req.body;
+  try {
+    const { data, error } = await resend.emails.send({
+      from: 'Acme <onboarding@resend.dev>',
+      to: email,
+      subject: 'Hello World',
+      html: '<strong>It works!</strong>',
+    });
+
+
+    console.log({ data });
+    return {
+      success: true,
+      massage: "Email code sent successfully",
+    }
+  } catch (error) {
+    console.warn(error);
+    return {
+      success: false,
+      massage: "Failed to send email code",
+    }
+  }
+};
 
 export const userLogout = (req, res) => {
   const token = req.cookies.token;
@@ -78,47 +103,47 @@ export const userLogout = (req, res) => {
   try {
     // Verify the token
     const decode = jwt.verify(token, process.env.JWT_SCODE);
-    
+
     // Clear the token cookie
     res.clearCookie('token');
 
     // Respond with a success message
-    res.json({ success: true, message: 'Logout successful'});
+    res.json({ success: true, message: 'Logout successful' });
   } catch (error) {
     // Token verification failed
     res.status(401).json({ success: false, message: 'Invalid token' });
   }
 };
-  /*res
-    .status(200)
-    .clearCookie('token')
-    .json({
-      success: true,
-      massage: "successfully Logout",
+/*res
+  .status(200)
+  .clearCookie('token')
+  .json({
+    success: true,
+    massage: "successfully Logout",
 
-    });
+  });
 };
 */
 
-export const getMyProfile =(req,res)=>{
+export const getMyProfile = (req, res) => {
   res.status(200).json({
     success: false,
     user: req.user,
-    admin:req.p
-})
-} 
+    admin: req.p
+  })
+}
 
-export const getuserByid = async (req,res) =>{
+export const getuserByid = async (req, res) => {
   const id = req.params.id;
   const user = await User.findById(id)
-    if(!user) return res.status(404).json({
-        success: false,
-        massage:"User not found"
-    })
+  if (!user) return res.status(404).json({
+    success: false,
+    massage: "User not found"
+  })
 
-    res.status(200).json({
-        success: true,
-        massage:"User Details ",
-        user
-    })
+  res.status(200).json({
+    success: true,
+    massage: "User Details ",
+    user
+  })
 }
