@@ -221,7 +221,7 @@ const ForgotPassword = () => {
                                         onChange={(e) => setCode(e.target.value)}
                                     />
                                 </div>
-                                <p>We have sent a password reset link to your email. Please check your inbox.</p>
+                                <p>We have sent a password reset Code to your email. Please check your inbox.</p>
                                 <input type="submit" value="Reset Password" />
 
                             </form>
