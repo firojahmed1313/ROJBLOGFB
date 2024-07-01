@@ -8,6 +8,7 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+
 const ForgotPassword = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
@@ -71,7 +72,7 @@ const ForgotPassword = () => {
                     }
                 } catch (error) {
                     console.warn(error);
-                    toast.error(error.response.data.massage, {
+                    toast.error(error.massage, {
                         position: "top-center",
                         autoClose: 5000,
                         hideProgressBar: false,
@@ -263,7 +264,7 @@ const ForgotPassword = () => {
                                         onChange={(e) => setCode(e.target.value)}
                                     />
                                 </div>
-                                <p>We have sent a password reset Code to your email. Please check your inbox.</p>
+                                <p>We have sent a password reset Code to your email. Please check your inbox.Use 1234</p>
                                 <input type="submit" value="Reset Password" />
 
                             </form>
