@@ -4,7 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-//@EnableMongoRepositories(basePackageClasses = jobsRepo.class)
+import com.roj.rojblog.Repo.UserRepo;
+
+@EnableMongoRepositories(basePackageClasses = UserRepo.class)
 @SpringBootApplication
 public class RojblogApplication {
 
