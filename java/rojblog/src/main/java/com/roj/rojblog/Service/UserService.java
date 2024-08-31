@@ -14,5 +14,25 @@ public class UserService {
     public List<Users> getAllUsers() {
         return ur.findAll();
     }
+    public Users getusers(String id) {
+        return ur.findById(id).orElse(new Users());
+    }
+    public Users registerUser(Users user) {
+        System.out.println(user.toString());
+        //return null;
+        return ur.save(user);
+    }
+    public Users loginUser(String email, String password) {
+        System.out.println(email + " " + password);
+        Users u = ur.findByEmail(email);
+        System.out.println(u);
+        if(u==null){
+            return null;
+        }
+        if(u.getPassword().equals(password)){
+            return u;
+        }
+        return null;
+    }
 
 }

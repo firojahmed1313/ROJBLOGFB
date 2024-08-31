@@ -7,5 +7,9 @@ import com.roj.rojblog.Model.Users;
 @Repository
 public interface UserRepo extends MongoRepository<Users,String>  {
 
+    Users findByEmail(String email);
+
+    
+
     
 } 
