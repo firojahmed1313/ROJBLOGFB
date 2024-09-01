@@ -51,11 +51,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public Users loginUser(@RequestBody LoginRequest loginRequest) {
-        String email = loginRequest.getEmail();
-        String password = loginRequest.getPassword();
-        System.out.println(email + " " + password);
-        return us.loginUser(email, password);
+    public String loginUser(@RequestBody LoginRequest loginRequest) {
+        return us.verifyUser(loginRequest);
     }
 
     @GetMapping("/myProfile")

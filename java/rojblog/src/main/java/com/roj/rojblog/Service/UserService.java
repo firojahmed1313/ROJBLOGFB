@@ -3,14 +3,25 @@ package com.roj.rojblog.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import com.roj.rojblog.Controller.LoginRequest;
 import com.roj.rojblog.Model.Users;
 import com.roj.rojblog.Repo.UserRepo;
 @Service
 public class UserService {
     @Autowired
     UserRepo ur;
+
+    @Autowired
+    AuthenticationManager authManager;
+    
+    @Autowired
+    JWTService jwtService;
+
     public List<Users> getAllUsers() {
         return ur.findAll();
     }
@@ -22,17 +33,25 @@ public class UserService {
         //return null;
         return ur.save(user);
     }
-    public Users loginUser(String email, String password) {
-        System.out.println(email + " " + password);
-        Users u = ur.findByEmail(email);
-        System.out.println(u);
-        if(u==null){
-            return null;
+    // public Users loginUser(String email, String password) {
+    //     System.out.println(email + " " + password);
+    //     Users u = ur.findByEmail(email);
+    //     System.out.println(u);
+    //     if(u==null){
+    //         return null;
+    //     }
+    //     if(u.getPassword().equals(password)){
+    //         return u;
+    //     }
+    //     return null;
+    // }
+    public String verifyUser(LoginRequest loginRequest) {
+        Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+   if (authentication.isAuthenticated()) {
+         return jwtService.generateToken(loginRequest.getEmail());
+        } else {
+            return "fail";
         }
-        if(u.getPassword().equals(password)){
-            return u;
-        }
-        return null;
     }
 
 }
