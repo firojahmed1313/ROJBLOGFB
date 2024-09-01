@@ -28,6 +28,8 @@ public class UserController {
     
     @GetMapping("/csrf-token")
     public CsrfToken getCsrfToken(HttpServletRequest request) {
+        //System.out.println(request);
+        //System.out.println((CsrfToken) request.getAttribute("_csrf"));
         return (CsrfToken) request.getAttribute("_csrf");
     }
     @GetMapping("/users")

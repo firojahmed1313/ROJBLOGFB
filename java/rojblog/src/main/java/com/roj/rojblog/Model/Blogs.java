@@ -1,15 +1,17 @@
 package com.roj.rojblog.Model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "blogs")
 public class Blogs {
+    private String _id;
     private String title;
     private String description;
     private String imgUrl;
-    private String user;
-    private Date createAt;
+    private ObjectId user;
+    private LocalDateTime createAt = LocalDateTime.now();
     
     public Blogs() {
     }
@@ -17,10 +19,18 @@ public class Blogs {
         this.title = title;
         this.description = description;
         this.imgUrl = imgUrl;
-        this.user = user;
-        this.createAt = new Date(System.currentTimeMillis());
+        this.user = new ObjectId(user);
+
     }
-    public Date getCreateAt() {
+    @Override
+    public String toString() {
+        return "Blogs [_id=" + _id + ", title=" + title + ", description=" + description + ", imgUrl=" + imgUrl + ", user="
+                + user + ", createAt=" + createAt + "]";
+    }
+    public String get_id() {
+        return _id;
+    }
+    public LocalDateTime getCreateAt() {
         return createAt;
     }
     public String getTitle() {
@@ -41,11 +51,11 @@ public class Blogs {
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
-    public String getUser() {
+    public ObjectId  getUser() {
         return user;
     }
     public void setUser(String user) {
-        this.user = user;
+        this.user = new ObjectId(user);
     }
 
     

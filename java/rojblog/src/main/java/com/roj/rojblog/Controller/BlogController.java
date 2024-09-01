@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.roj.rojblog.Model.Blogs;
@@ -22,34 +23,36 @@ public class BlogController {
         return bs.getAllBlogs();
     }
 
-    @GetMapping("/myBlog/{id}")
+    @GetMapping("/blog/{id}")
     public Blogs getMyBlogById(@PathVariable String id){
-        // Implement logic to retrieve blog by ID
-        return null;
+        // Implement logic to retrieve a blog by ID
+
+        return bs.getBlogById(id);
     }
 
     @PostMapping("/create")
-    public Blogs addBlog(Blogs blog){
+    public Blogs addBlog(@RequestBody Blogs blog){
         // Implement logic to add a new blog
-        return null;
+        System.out.println(blog.toString());
+        return bs.createBlog(blog);
     }
 
-    @GetMapping("/myAllBlog/{id}")
-    public List<Blogs> getMyBlogList(@PathVariable String id){
+    @GetMapping("/myAllBlog/{uId}")
+    public List<Blogs> getMyBlogList(@PathVariable String uId){
         // Implement logic to retrieve all blogs by user ID
-        return null;
+        return bs.getAllBlogsByUser(uId);
     }
 
     @PutMapping("/updateBlog/{id}")
-    public Blogs updateBlog(@PathVariable String id, Blogs updatedBlog){
+    public Blogs updateBlog(@PathVariable String id,@RequestBody Blogs updatedBlog){
         // Implement logic to update a blog
-        return null;
+        return bs.updateBlog(id,updatedBlog);
     }
 
     @DeleteMapping("/deleteBlog/{id}")
-    public void deleteBlog(@PathVariable String id){
-        // Implement logic to delete a blog
-        return;
+    public Blogs deleteBlog(@PathVariable String id){
+        
+        return bs.deleteBlog(id);
     }
 
 
