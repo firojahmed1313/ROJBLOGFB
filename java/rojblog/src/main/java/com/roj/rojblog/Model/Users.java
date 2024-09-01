@@ -19,11 +19,14 @@ public class Users {
                 + createAt + "]";
     }
 
+    
     public Users(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
+        //this.createAt = createAt;
     }
+
     public String get_id() {
         return _id;
     }
@@ -48,7 +51,7 @@ public class Users {
     }
     
     public LocalDateTime getCreateAt() {
-        return LocalDateTime.now();
+        return createAt;
     }
     // public void setCreateAt() {
     //     this.createAt = LocalDateTime.now();
