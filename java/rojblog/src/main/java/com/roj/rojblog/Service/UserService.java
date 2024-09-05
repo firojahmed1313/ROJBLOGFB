@@ -53,5 +53,11 @@ public class UserService {
             return "fail";
         }
     }
+    public Users getMyProfile() {
+
+        //return ur.findById(jwtService.extractUserName(jwtService.generateToken("dummy_token"))).orElse(new Users());
+        return null;
+        
+    }
 
 }

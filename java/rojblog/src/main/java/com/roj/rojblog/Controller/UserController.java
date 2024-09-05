@@ -57,7 +57,7 @@ public class UserController {
 
     @GetMapping("/myProfile")
     public Users myProfile() {
-        // Implement logic to retrieve the current user's profile
-        return null;
+        
+        return us.getMyProfile();
     }
 }
