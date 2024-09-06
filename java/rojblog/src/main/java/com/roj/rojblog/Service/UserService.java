@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.roj.rojblog.Controller.LoginRequest;
+import com.roj.rojblog.Model.UserPrincipal;
 import com.roj.rojblog.Model.Users;
 import com.roj.rojblog.Repo.UserRepo;
 
@@ -60,9 +62,27 @@ public class UserService {
     }
 
     public Users getMyProfile() {
-        
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof UsernamePasswordAuthenticationToken) {
+            UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+            Object principal = token.getPrincipal();
+    
+            if (principal instanceof UserPrincipal) {
+                // Cast the principal to your UserPrincipal object
+                UserPrincipal userPrincipal = (UserPrincipal) principal;
+                
+                // Extract user details from UserPrincipal
+                System.out.println("Email: " + userPrincipal.getUsername());
+                System.out.println("Password: " + userPrincipal.getPassword());
+                
+                // Return the corresponding Users object from your service
+                return ur.findByEmail(userPrincipal.getUsername());
+            }else{
+                System.out.println("no");
+            }
+        }
         return null;
-
     }
+    
 
 }
