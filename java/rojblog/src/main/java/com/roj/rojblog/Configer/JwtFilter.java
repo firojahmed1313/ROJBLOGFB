@@ -24,7 +24,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
     private JWTService jwtService;
-
+    
     @Autowired
     ApplicationContext context;
 
@@ -37,6 +37,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             token = authHeader.substring(7);
+            System.out.println("Token : " + token);
             username = jwtService.extractUserName(token);
             System.out.println("Email : " + username);
         }
